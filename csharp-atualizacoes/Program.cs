@@ -16,7 +16,8 @@ namespace csharp_atualizacoes
                 "3. Membros Com Corpo De Expressão",
                 "4. Using Static",
                 "5. Operadores Null Condicionais",
-                "6. Interpolação de Strings"
+                "6. Interpolação de Strings",
+                "7. Monitorando Alteração em Propriedades"
             };
 
             Console.WriteLine("ÍNDICE DE PROGRAMAS");
@@ -56,6 +57,9 @@ namespace csharp_atualizacoes
                         break;
                     case 6:
                         new CSharp6.R06.Programa().Main();
+                        break;
+                    case 7:
+                        new CSharp6.R07.Programa().Main();
                         break;
                     default:
                         break;
