@@ -10,7 +10,7 @@ namespace CSharp6.R02
     {
         public void Main()
         {
-            Console.WriteLine("1. Propriedades Automáticas Somente-Leitura");
+            Console.WriteLine("2. Inicializador De Propriedade Automática");
 
             Aluno aluno = new Aluno("Marty", "McFly", new DateTime(1968, 6, 12));
 
