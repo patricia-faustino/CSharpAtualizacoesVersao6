@@ -8,8 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Console;
 using static System.DateTime;
+using static System.String;
 
-namespace CSharp6.R07
+namespace CSharp6.R08
 {
     class Programa
     {
@@ -39,6 +40,8 @@ namespace CSharp6.R07
             aluno.PropertyChanged += Aluno_PropertyChanged;
             aluno.Telefone = "5469-89358";
             aluno.Endereco = "Rua Vergueiro, 3185";
+
+            Aluno aluno3 = new Aluno("Charlie", "");
         }
 
         private void Aluno_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -73,8 +76,8 @@ namespace CSharp6.R07
                 if (endereco != value)
                 {
                     endereco = value;
+                    string propertyName = nameof(Endereco);
                     OnPropertyChanged();
-                    OnPropertyChanged(nameof(DadosPessoais));
                 }
             }
         }
@@ -88,8 +91,9 @@ namespace CSharp6.R07
                 if(telefone != value)
                 {
                     telefone = value;
+
+                    string propertyName = nameof(Telefone);
                     OnPropertyChanged();
-                    OnPropertyChanged(nameof(DadosPessoais));
                 }
             }
         }
@@ -113,9 +117,21 @@ namespace CSharp6.R07
 
         public Aluno(string nome, string sobrenome)
         {
+      
+            VerificarParametroPreenchido(nome);
+            VerificarParametroPreenchido(sobrenome);
+
             Nome = nome;
             Sobrenome = sobrenome;
 
+        }
+
+        private static void VerificarParametroPreenchido(string nome)
+        {
+            if (IsNullOrEmpty(nome))
+            {
+                throw new ArgumentException($"Parâmetro não informado {nameof(nome)}");
+            }
         }
 
         public Aluno(string nome, string sobrenome, DateTime dataNascimento) : this(nome, sobrenome)
