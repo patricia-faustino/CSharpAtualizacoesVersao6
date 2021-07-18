@@ -10,11 +10,41 @@ namespace CSharp6.R02
     {
         public void Main()
         {
-            Console.WriteLine("2. Inicializadores De Propriedade Automática");
+            Console.WriteLine("1. Propriedades Automáticas Somente-Leitura");
+
+            Aluno aluno = new Aluno("Marty", "McFly", new DateTime(1968, 6, 12));
+
+            Console.WriteLine(aluno.Nome);
+            Console.WriteLine(aluno.Sobrenome);
 
 
         }
     }
 
-   
+    class Aluno
+    {
+
+        public string Nome { get; }
+
+        public string Sobrenome { get; }
+
+        //inicializador de propriedade automática(default)
+        public DateTime DataNascimento { get; } = new DateTime(1990, 1, 1); 
+
+        public Aluno(string nome, string sobrenome)
+        {
+            Nome = nome;
+            Sobrenome = sobrenome;
+
+        }
+
+        public Aluno(string nome, string sobrenome, DateTime dataNascimento) : this(nome, sobrenome)
+        {
+ 
+            DataNascimento = dataNascimento;
+        }
+
+    }
+
+
 }
