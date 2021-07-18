@@ -1,0 +1,7 @@
+C:\src\CSharpAtualizacoes\csharp-atualizacoes\bin\Debug\csharp-atualizacoes.exe.config
+C:\src\CSharpAtualizacoes\csharp-atualizacoes\bin\Debug\csharp-atualizacoes.exe
+C:\src\CSharpAtualizacoes\csharp-atualizacoes\bin\Debug\csharp-atualizacoes.pdb
+C:\src\CSharpAtualizacoes\csharp-atualizacoes\obj\Debug\csharp-atualizacoes.csprojAssemblyReference.cache
+C:\src\CSharpAtualizacoes\csharp-atualizacoes\obj\Debug\csharp-atualizacoes.csproj.CoreCompileInputs.cache
+C:\src\CSharpAtualizacoes\csharp-atualizacoes\obj\Debug\csharp-atualizacoes.exe
+C:\src\CSharpAtualizacoes\csharp-atualizacoes\obj\Debug\csharp-atualizacoes.pdb
