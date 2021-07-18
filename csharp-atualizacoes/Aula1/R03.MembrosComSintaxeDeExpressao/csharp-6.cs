@@ -32,7 +32,7 @@ namespace CSharp6.R03
 
         public string NomeCompleto => Nome + " " + Sobrenome;
 
-        public int GetIdade() => (int)(((DateTime.Now - DataNascimento).TotalDays) / 365);
+        public int GetIdade() => (int)(((DateTime.Now - DataNascimento).TotalDays) / 365.242199);
 
         public Aluno(string nome, string sobrenome)
         {
