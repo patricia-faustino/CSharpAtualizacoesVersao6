@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Console;
@@ -67,13 +68,15 @@ namespace CSharp6.R07
         public string Endereco
         {
             get { return endereco; }
-            set {
-                if(endereco != value)
+            set
+            {
+                if (endereco != value)
                 {
                     endereco = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Endereco"));
+                    string propertyName = nameof(Endereco);
+                    OnPropertyChanged();
                 }
- }
+            }
         }
 
         private string telefone;
@@ -85,7 +88,9 @@ namespace CSharp6.R07
                 if(telefone != value)
                 {
                     telefone = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Telefone"));
+
+                    string propertyName = nameof(Telefone);
+                    OnPropertyChanged();
                 }
             }
         }
@@ -125,6 +130,11 @@ namespace CSharp6.R07
             avalicacoes.Add(avaliacao);
         }
 
+        private void OnPropertyChanged([CallerMemberName]string propertyName = null)
+        {
+
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
         public Avaliacao MelhorAvaliacao => avalicacoes.OrderBy(a => a.Nota).LastOrDefault();
 
     }
