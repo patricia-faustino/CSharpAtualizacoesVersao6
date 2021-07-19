@@ -208,9 +208,6 @@ namespace CSharp6.R11
             Bimestre = bimestre;
             CodigoMateria = codigoMateria;
             Nota = nota;
-
-            
-
         }
 
         public int Bimestre { get; }
