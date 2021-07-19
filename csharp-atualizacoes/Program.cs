@@ -21,7 +21,8 @@ namespace csharp_atualizacoes
                 "8. Validação de Parâmetros",
                 "9. Filtros De Exceção",
                 "10. Await em Catch e Finally",
-                "11. Inicializadores de Indíce"
+                "11. Inicializadores de Indíce",
+                "12. Criando Lista Customizada com IEnumerable",
             };
 
             Console.WriteLine("ÍNDICE DE PROGRAMAS");
@@ -76,6 +77,9 @@ namespace csharp_atualizacoes
                         break;
                     case 11:
                         new CSharp6.R11.Programa().Main();
+                        break;
+                    case 12:
+                        new CSharp6.R12.Programa().Main();
                         break;
                     default:
                         break;

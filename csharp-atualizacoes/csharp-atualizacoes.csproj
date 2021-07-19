@@ -52,6 +52,7 @@
     <Compile Include="Aula4\R10.AwaitCatchFinally\csharp-6.cs" />
     <Compile Include="Aula4\R09.FiltrosDeExcecao\csharp-6.cs" />
     <Compile Include="Aula4\R08.FiltrosDeExcecao\csharp-6.cs" />
+    <Compile Include="Aula5\R12.CriandoListaCustomizadaComIEnumerable\csharp-6.cs" />
     <Compile Include="Aula5\R11.InicializadoresDeIndices\csharp-6.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
