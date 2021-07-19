@@ -10,38 +10,54 @@ using static System.Console;
 using static System.DateTime;
 using static System.String;
 
-namespace CSharp6.R08
+namespace CSharp6.R09
 {
     class Programa
     {
         public void Main()
         {
 
-            Aluno aluno = new Aluno("Marty", "McFly", new DateTime(1968, 6, 12))
+            try
             {
-                Endereco = "9303 Lyon Drive Hill Valey CA",
-                Telefone = "555-4356"
-            };
+                Aluno aluno = new Aluno("Marty", "McFly", new DateTime(1968, 6, 12))
+                {
+                    Endereco = "9303 Lyon Drive Hill Valey CA",
+                    Telefone = "555-4356"
+                };
 
-            WriteLine(aluno.Nome);
-            WriteLine(aluno.Sobrenome);
-            WriteLine(aluno.NomeCompleto);
-            WriteLine($"Idade:  {aluno.GetIdade()}");
-            WriteLine(aluno.DadosPessoais);
+                WriteLine(aluno.Nome);
+                WriteLine(aluno.Sobrenome);
+                WriteLine(aluno.NomeCompleto);
+                WriteLine($"Idade:  {aluno.GetIdade()}");
+                WriteLine(aluno.DadosPessoais);
 
-            aluno.AdicionarAvaliacao(new Avaliacao(1, "Geografia", 8));
-            aluno.AdicionarAvaliacao(new Avaliacao(1, "Matematica", 7));
-            aluno.AdicionarAvaliacao(new Avaliacao(1, "História", 9));
-            ImprimirMelhorNota(aluno);
+                aluno.AdicionarAvaliacao(new Avaliacao(1, "Geografia", 8));
+                aluno.AdicionarAvaliacao(new Avaliacao(1, "Matematica", 7));
+                aluno.AdicionarAvaliacao(new Avaliacao(1, "História", 9));
+                ImprimirMelhorNota(aluno);
 
-            Aluno aluno2 = new Aluno("Bart", "Simpson");
-            ImprimirMelhorNota(aluno2);
+                Aluno aluno2 = new Aluno("Bart", "Simpson");
+                ImprimirMelhorNota(aluno2);
 
-            aluno.PropertyChanged += Aluno_PropertyChanged;
-            aluno.Telefone = "5469-89358";
-            aluno.Endereco = "Rua Vergueiro, 3185";
+                aluno.PropertyChanged += Aluno_PropertyChanged;
+                aluno.Telefone = "5469-89358";
+                aluno.Endereco = "Rua Vergueiro, 3185";
 
-            Aluno aluno3 = new Aluno("Charlie", "");
+                Aluno aluno3 = new Aluno("Charlie", "");
+            }
+            catch (ArgumentException exc) when (exc.Message.Contains("não informado"))
+            {
+                Console.WriteLine($"Parâmetro {exc.ParamName} não foi informado!");
+            }
+            catch (ArgumentException exc)
+            {
+                    Console.WriteLine("Parâmetro com problema");
+            }
+
+            catch (Exception exc)
+            {
+                Console.WriteLine(exc.ToString());
+            }
         }
 
         private void Aluno_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -91,8 +107,6 @@ namespace CSharp6.R08
                 if(telefone != value)
                 {
                     telefone = value;
-
-                    string propertyName = nameof(Telefone);
                     OnPropertyChanged();
                 }
             }
@@ -118,19 +132,19 @@ namespace CSharp6.R08
         public Aluno(string nome, string sobrenome)
         {
       
-            VerificarParametroPreenchido(nome);
-            VerificarParametroPreenchido(sobrenome);
+            VerificarParametroPreenchido(nome, nameof(nome));
+            VerificarParametroPreenchido(sobrenome, nameof(sobrenome));
 
             Nome = nome;
             Sobrenome = sobrenome;
 
         }
 
-        private static void VerificarParametroPreenchido(string nome)
+        private static void VerificarParametroPreenchido(string valorDoParametro, string nomeDoParametro)
         {
-            if (IsNullOrEmpty(nome))
+            if (IsNullOrEmpty(valorDoParametro))
             {
-                throw new ArgumentException($"Parâmetro não informado: {nameof(nome)}");
+                throw new ArgumentException($"Parâmetro não informado {nomeDoParametro}");
             }
         }
 

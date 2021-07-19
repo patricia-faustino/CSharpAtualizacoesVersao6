@@ -1,0 +1,5 @@
+Aplicação está iniciando...
+Aluno Marty McFly criado
+Aluno Bart Simpson criado
+Parâmetro sobrenome não foi informado!
+Aplicação terminou.

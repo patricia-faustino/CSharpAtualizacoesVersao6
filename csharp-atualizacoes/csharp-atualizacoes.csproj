@@ -49,6 +49,8 @@
     <Compile Include="Aula2\R05.NullCondicionais\csharp-6.cs" />
     <Compile Include="Aula3\R06.InterpolacaoDeCadeiaDeCaracteres\csharp-6.cs" />
     <Compile Include="Aula3\R07.MonitorandoAlteracaoEmPropriedades\csharp-6.cs" />
+    <Compile Include="Aula4\R10.AwaitCatchFinally\csharp-6.cs" />
+    <Compile Include="Aula4\R09.FiltrosDeExcecao\csharp-6.cs" />
     <Compile Include="Aula4\R08.FiltrosDeExcecao\csharp-6.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

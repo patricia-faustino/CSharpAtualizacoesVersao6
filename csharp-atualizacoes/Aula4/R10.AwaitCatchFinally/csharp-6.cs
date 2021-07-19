@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -10,38 +11,71 @@ using static System.Console;
 using static System.DateTime;
 using static System.String;
 
-namespace CSharp6.R08
+namespace CSharp6.R10
 {
     class Programa
     {
-        public void Main()
+        public async void Main()
         {
 
-            Aluno aluno = new Aluno("Marty", "McFly", new DateTime(1968, 6, 12))
+            StreamWriter logAplicacao = new StreamWriter("LogAplicacao.txt");
+            try
             {
-                Endereco = "9303 Lyon Drive Hill Valey CA",
-                Telefone = "555-4356"
-            };
+                await logAplicacao.WriteLineAsync("Aplicação está iniciando...");
 
-            WriteLine(aluno.Nome);
-            WriteLine(aluno.Sobrenome);
-            WriteLine(aluno.NomeCompleto);
-            WriteLine($"Idade:  {aluno.GetIdade()}");
-            WriteLine(aluno.DadosPessoais);
+                Aluno aluno = new Aluno("Marty", "McFly", new DateTime(1968, 6, 12))
+                {
+                    Endereco = "9303 Lyon Drive Hill Valey CA",
+                    Telefone = "555-4356"
+                };
 
-            aluno.AdicionarAvaliacao(new Avaliacao(1, "Geografia", 8));
-            aluno.AdicionarAvaliacao(new Avaliacao(1, "Matematica", 7));
-            aluno.AdicionarAvaliacao(new Avaliacao(1, "História", 9));
-            ImprimirMelhorNota(aluno);
+                await logAplicacao.WriteLineAsync("Aluno Marty McFly criado");
+                WriteLine(aluno.Nome);
+                WriteLine(aluno.Sobrenome);
+                WriteLine(aluno.NomeCompleto);
+                WriteLine($"Idade:  {aluno.GetIdade()}");
+                WriteLine(aluno.DadosPessoais);
 
-            Aluno aluno2 = new Aluno("Bart", "Simpson");
-            ImprimirMelhorNota(aluno2);
+                aluno.AdicionarAvaliacao(new Avaliacao(1, "Geografia", 8));
+                aluno.AdicionarAvaliacao(new Avaliacao(1, "Matematica", 7));
+                aluno.AdicionarAvaliacao(new Avaliacao(1, "História", 9));
+                ImprimirMelhorNota(aluno);
 
-            aluno.PropertyChanged += Aluno_PropertyChanged;
-            aluno.Telefone = "5469-89358";
-            aluno.Endereco = "Rua Vergueiro, 3185";
+                Aluno aluno2 = new Aluno("Bart", "Simpson");
+                ImprimirMelhorNota(aluno2);
+                await logAplicacao.WriteLineAsync("Aluno Bart Simpson criado");
 
-            Aluno aluno3 = new Aluno("Charlie", "");
+                aluno.PropertyChanged += Aluno_PropertyChanged;
+                aluno.Telefone = "5469-89358";
+                aluno.Endereco = "Rua Vergueiro, 3185";
+
+                Aluno aluno3 = new Aluno("Charlie", "");
+                await logAplicacao .WriteLineAsync("Aluno Charlie criado");
+            }
+            catch (ArgumentException exc) when (exc.Message.Contains("não informado"))
+            {
+                string mensagem = $"Parâmetro {exc.ParamName} não foi informado!";
+                await logAplicacao.WriteLineAsync(mensagem);
+                Console.WriteLine(mensagem);
+            }
+            catch (ArgumentException exc)
+            {
+                string mensagem = "Parâmetro com problema";
+                await logAplicacao.WriteLineAsync(mensagem);
+                Console.WriteLine(mensagem);
+            }
+
+            catch (Exception exc)
+            {
+                await logAplicacao.WriteLineAsync(exc.ToString());
+                Console.WriteLine(exc.ToString());
+            }
+            finally
+            {
+                await logAplicacao.WriteLineAsync("Aplicação terminou.");
+                //Liberando arquivos não gerenciados
+                logAplicacao.Dispose();
+            }
         }
 
         private void Aluno_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -76,8 +110,8 @@ namespace CSharp6.R08
                 if (endereco != value)
                 {
                     endereco = value;
-                    string propertyName = nameof(Endereco);
                     OnPropertyChanged();
+                    OnPropertyChanged(nameof(DadosPessoais));
                 }
             }
         }
@@ -91,9 +125,8 @@ namespace CSharp6.R08
                 if(telefone != value)
                 {
                     telefone = value;
-
-                    string propertyName = nameof(Telefone);
                     OnPropertyChanged();
+                    OnPropertyChanged(nameof(DadosPessoais));
                 }
             }
         }
@@ -118,19 +151,19 @@ namespace CSharp6.R08
         public Aluno(string nome, string sobrenome)
         {
       
-            VerificarParametroPreenchido(nome);
-            VerificarParametroPreenchido(sobrenome);
+            VerificarParametroPreenchido(nome, nameof(nome));
+            VerificarParametroPreenchido(sobrenome, nameof(sobrenome));
 
             Nome = nome;
             Sobrenome = sobrenome;
 
         }
 
-        private static void VerificarParametroPreenchido(string nome)
+        private static void VerificarParametroPreenchido(string valorDoParametro, string nomeDoParametro)
         {
-            if (IsNullOrEmpty(nome))
+            if (IsNullOrEmpty(valorDoParametro))
             {
-                throw new ArgumentException($"Parâmetro não informado: {nameof(nome)}");
+                throw new ArgumentException($"Parâmetro não informado!", nomeDoParametro);
             }
         }
 
