@@ -57,7 +57,10 @@ namespace CSharp6.R12
                 Aluno aluno3 = new Aluno("Charlie", "Brown");
                 await logAplicacao .WriteLineAsync("Aluno Charlie Brown criado");
 
-                ListaDeMatricula listaDeMatricula = new ListaDeMatricula();
+                ListaDeMatricula listaDeMatricula = new ListaDeMatricula()
+                {
+                    aluno, aluno2, aluno3
+                };
                 listaDeMatricula.Matricular(aluno);
                 listaDeMatricula.Matricular(aluno2);
                 listaDeMatricula.Matricular(aluno3);
@@ -260,5 +263,11 @@ namespace CSharp6.R12
         {
             return ((IEnumerable<Aluno>)alunos).GetEnumerator();
         }
+    }
+
+    static class MatricularAlunos
+    {
+        public static void Add(this ListaDeMatricula lista, Aluno aluno) => lista.Matricular(aluno);
+        
     }
 }
