@@ -45,6 +45,15 @@
     <Compile Include="Aula1\R01.PropriedadesAutomaticasSomenteLeitura\csharp-6.cs" />
     <Compile Include="Aula1\R02.InicializadoresDePropriedadeAutomatica\csharp-6.cs" />
     <Compile Include="Aula1\R03.MembrosComSintaxeDeExpressao\csharp-6.cs" />
+    <Compile Include="Aula2\R04.UsingStatic\csharp-6.cs" />
+    <Compile Include="Aula2\R05.NullCondicionais\csharp-6.cs" />
+    <Compile Include="Aula3\R06.InterpolacaoDeCadeiaDeCaracteres\csharp-6.cs" />
+    <Compile Include="Aula3\R07.MonitorandoAlteracaoEmPropriedades\csharp-6.cs" />
+    <Compile Include="Aula4\R10.AwaitCatchFinally\csharp-6.cs" />
+    <Compile Include="Aula4\R09.FiltrosDeExcecao\csharp-6.cs" />
+    <Compile Include="Aula4\R08.FiltrosDeExcecao\csharp-6.cs" />
+    <Compile Include="Aula5\R12.CriandoListaCustomizadaComIEnumerable\csharp-6.cs" />
+    <Compile Include="Aula5\R11.InicializadoresDeIndices\csharp-6.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
